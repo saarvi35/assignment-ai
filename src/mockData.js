@@ -1,0 +1,287 @@
+export const apiRegistry = {
+  home: ["POST /api/login/", "POST /api/register/"],
+  currentUser: ["GET /api/current-user/"],
+  owner: {
+    analytics: [
+      "GET /api/overview/",
+      "GET /api/task-analytics/",
+      "GET /api/all-projects/",
+      "GET /api/all-tasks/",
+      "GET /api/users/",
+    ],
+    roles: [
+      "GET /api/roles/",
+      "POST /api/roles/",
+      "GET /api/roles/{id}/",
+      "PATCH /api/roles/{id}/",
+      "DELETE /api/roles/{id}/",
+    ],
+    users: [
+      "GET /api/users/",
+      "POST /api/create-user/",
+      "PATCH /api/update-user/{user_id}/",
+      "DELETE /api/delete-user/{user_id}/",
+    ],
+    projects: [
+      "GET /api/projects/",
+      "POST /api/projects/",
+      "GET /api/projects/{id}/",
+      "PATCH /api/projects/{id}/",
+      "DELETE /api/projects/{id}/",
+    ],
+    tasks: [
+      "GET /api/tasks/",
+      "POST /api/tasks/",
+      "GET /api/tasks/{id}/",
+      "PATCH /api/tasks/{id}/",
+      "DELETE /api/tasks/{id}/",
+    ],
+    settings: [
+      "GET /api/companies/",
+      "GET /api/companies/{id}/",
+      "PATCH /api/companies/{id}/",
+    ],
+  },
+  manager: {
+    analytics: [
+      "GET /api/manager-overview/",
+      "GET /api/manager-projects/",
+      "GET /api/all-tasks/",
+      "GET /api/users/",
+    ],
+    users: ["GET /api/users/", "PATCH /api/update-user/{user_id}/"],
+    projects: [
+      "GET /api/manager-projects/",
+      "POST /api/projects/",
+      "GET /api/projects/{id}/",
+      "PATCH /api/projects/{id}/",
+      "DELETE /api/projects/{id}/",
+    ],
+    tasks: [
+      "GET /api/all-tasks/",
+      "POST /api/tasks/",
+      "GET /api/tasks/{id}/",
+      "PATCH /api/tasks/{id}/",
+      "DELETE /api/tasks/{id}/",
+    ],
+    attendanceLeave: [
+      "POST /api/attendance/checkin/",
+      "POST /api/attendance/checkout/",
+      "GET /api/attendance/",
+      "POST /api/leave/apply/",
+      "GET /api/my-leaves/",
+    ],
+  },
+  hr: {
+    analytics: ["GET /api/hr-dashboard/", "GET /api/users/", "GET /api/team-leaves/"],
+    roles: [
+      "GET /api/roles/",
+      "POST /api/roles/",
+      "GET /api/roles/{id}/",
+      "PATCH /api/roles/{id}/",
+      "DELETE /api/roles/{id}/",
+    ],
+    users: [
+      "GET /api/users/",
+      "POST /api/create-user/",
+      "PATCH /api/update-user/{user_id}/",
+      "DELETE /api/delete-user/{user_id}/",
+    ],
+    attendance: [
+      "GET /api/attendance/",
+      "GET /api/hr-dashboard/",
+      "POST /api/review/{employee_id}/",
+    ],
+    leaves: ["GET /api/team-leaves/", "PATCH /api/leave/{leave_id}/status/"],
+  },
+  employee: {
+    projectsTasks: [
+      "GET /api/my-projects/",
+      "GET /api/my-tasks/",
+      "GET /api/tasks/{id}/",
+      "PATCH /api/tasks/{id}/",
+    ],
+    attendanceLeave: [
+      "POST /api/attendance/checkin/",
+      "POST /api/attendance/checkout/",
+      "GET /api/attendance/",
+      "POST /api/leave/apply/",
+      "GET /api/my-leaves/",
+    ],
+  },
+  client: {
+    progress: ["GET /api/client-projects/"],
+  },
+};
+
+export const initialData = {
+  companies: [
+    {
+      id: 1,
+      name: "Acme Pulse Labs",
+      email: "hello@acmepulse.com",
+      phone: "9876543210",
+      size: "50-100",
+      address: "Jaipur",
+      logo: null,
+      owner: 1,
+      last_user_number: 12,
+    },
+  ],
+  roles: [
+    {
+      id: 1,
+      company: 1,
+      name: "OWNER",
+      slug: "owner",
+      level: 100,
+      can_manage_company: true,
+      can_manage_roles: true,
+      can_manage_users: true,
+      can_create_project: true,
+      can_assign_task: true,
+      can_view_all_tasks: true,
+      can_view_team_tasks: true,
+      can_view_assigned_tasks: true,
+      can_update_task_status: true,
+      can_view_project_progress: true,
+      can_manage_hr: true,
+      can_approve_leave: true,
+      can_view_attendance: true,
+      can_manage_payroll: true
+    },
+    {
+      id: 2,
+      company: 1,
+      name: "MANAGER",
+      slug: "manager",
+      level: 60,
+      can_manage_company: false,
+      can_manage_roles: false,
+      can_manage_users: true,
+      can_create_project: true,
+      can_assign_task: true,
+      can_view_all_tasks: false,
+      can_view_team_tasks: true,
+      can_view_assigned_tasks: true,
+      can_update_task_status: true,
+      can_view_project_progress: true,
+      can_manage_hr: false,
+      can_approve_leave: true,
+      can_view_attendance: true,
+      can_manage_payroll: false
+    },
+    {
+      id: 3,
+      company: 1,
+      name: "HR",
+      slug: "hr",
+      level: 70,
+      can_manage_company: false,
+      can_manage_roles: true,
+      can_manage_users: true,
+      can_create_project: false,
+      can_assign_task: false,
+      can_view_all_tasks: false,
+      can_view_team_tasks: true,
+      can_view_assigned_tasks: false,
+      can_update_task_status: false,
+      can_view_project_progress: false,
+      can_manage_hr: true,
+      can_approve_leave: true,
+      can_view_attendance: true,
+      can_manage_payroll: false
+    },
+    {
+      id: 4,
+      company: 1,
+      name: "EMPLOYEE",
+      slug: "employee",
+      level: 20,
+      can_manage_company: false,
+      can_manage_roles: false,
+      can_manage_users: false,
+      can_create_project: false,
+      can_assign_task: false,
+      can_view_all_tasks: false,
+      can_view_team_tasks: false,
+      can_view_assigned_tasks: true,
+      can_update_task_status: true,
+      can_view_project_progress: false,
+      can_manage_hr: false,
+      can_approve_leave: false,
+      can_view_attendance: true,
+      can_manage_payroll: false
+    },
+    {
+      id: 5,
+      company: 1,
+      name: "CLIENT",
+      slug: "client",
+      level: 10,
+      can_manage_company: false,
+      can_manage_roles: false,
+      can_manage_users: false,
+      can_create_project: false,
+      can_assign_task: false,
+      can_view_all_tasks: false,
+      can_view_team_tasks: false,
+      can_view_assigned_tasks: false,
+      can_update_task_status: false,
+      can_view_project_progress: true,
+      can_manage_hr: false,
+      can_approve_leave: false,
+      can_view_attendance: false,
+      can_manage_payroll: false
+    }
+  ],
+  users: [
+    { id: 1, name: "Saanvi Owner", email: "owner@acmepulse.com", role: "OWNER", roleId: 1, level: 100, status: "ACTIVE", companyId: 1 },
+    { id: 2, name: "Raghav Manager", email: "manager@acmepulse.com", role: "MANAGER", roleId: 2, level: 60, status: "ACTIVE", companyId: 1 },
+    { id: 3, name: "Ira HR", email: "hr@acmepulse.com", role: "HR", roleId: 3, level: 70, status: "ACTIVE", companyId: 1 },
+    { id: 4, name: "Dev Employee", email: "employee@acmepulse.com", role: "EMPLOYEE", roleId: 4, level: 20, status: "ACTIVE", companyId: 1 },
+    { id: 5, name: "Nexa Client", email: "client@nexa.com", role: "CLIENT", roleId: 5, level: 10, status: "ACTIVE", companyId: 1 },
+    { id: 6, name: "Meera Engineer", email: "meera@acmepulse.com", role: "EMPLOYEE", roleId: 4, level: 20, status: "ACTIVE", companyId: 1 },
+    { id: 7, name: "Kabir Designer", email: "kabir@acmepulse.com", role: "EMPLOYEE", roleId: 4, level: 20, status: "ACTIVE", companyId: 1 }
+  ],
+  profiles: [
+    { id: 2, department: { id: 1, name: "Delivery", description: "Project delivery team" }, designation: "Engineering Manager", date_joined: "2025-10-12", salary: "95000.00", phone: "9999000011", address: "Jaipur" },
+    { id: 4, department: { id: 2, name: "Engineering", description: "Product engineering" }, designation: "Frontend Developer", date_joined: "2026-01-03", salary: "65000.00", phone: "9999000012", address: "Jaipur" }
+  ],
+  departments: [
+    { id: 1, name: "Delivery", description: "Project delivery team" },
+    { id: 2, name: "Engineering", description: "Product engineering" },
+    { id: 3, name: "Design", description: "UX and product design" }
+  ],
+  projects: [
+    { id: 1, company: 1, client: 5, manager: 2, name: "Nova HRMS", description: "Unified workforce and leave management platform.", status: "ACTIVE", priority: "HIGH", start_date: "2026-02-01", end_date: "2026-07-25", budget: "250000.00", actual_cost: "142000.00", progress: 72, is_active: true, created_at: "2026-02-01T10:00:00Z" },
+    { id: 2, company: 1, client: 5, manager: 2, name: "Client Portal Revamp", description: "External dashboard for clients with live progress visibility.", status: "ON_HOLD", priority: "MEDIUM", start_date: "2026-03-10", end_date: "2026-08-12", budget: "180000.00", actual_cost: "76000.00", progress: 44, is_active: true, created_at: "2026-03-10T10:00:00Z" },
+    { id: 3, company: 1, client: 5, manager: 2, name: "Payroll Engine", description: "Salary engine with attendance-linked payroll rules.", status: "ACTIVE", priority: "HIGH", start_date: "2026-01-15", end_date: "2026-06-20", budget: "210000.00", actual_cost: "163500.00", progress: 81, is_active: true, created_at: "2026-01-15T10:00:00Z" }
+  ],
+  tasks: [
+    { id: 11, title: "Design analytics layout", description: "Create modular analytics grid and card system.", assigned_to: 4, assigned_to_name: "Dev Employee", created_by: 2, created_by_name: "Raghav Manager", company: 1, status: "IN_PROGRESS", priority: "HIGH", due_date: "2026-04-14", attachment: null, image: null, reference_link: "https://example.com/analytics-layout", progress: 68, created_at: "2026-03-28T12:30:00Z", project: 1 },
+    { id: 12, title: "Build role detail drawer", description: "Detailed role page with edit and delete actions.", assigned_to: 6, assigned_to_name: "Meera Engineer", created_by: 1, created_by_name: "Saanvi Owner", company: 1, status: "PENDING", priority: "MEDIUM", due_date: "2026-04-18", attachment: null, image: null, reference_link: "", progress: 15, created_at: "2026-03-29T12:30:00Z", project: 1 },
+    { id: 13, title: "Create leave approval module", description: "HR approval lane with optimistic status updates.", assigned_to: 7, assigned_to_name: "Kabir Designer", created_by: 3, created_by_name: "Ira HR", company: 1, status: "REVIEW", priority: "HIGH", due_date: "2026-04-09", attachment: null, image: null, reference_link: "", progress: 88, created_at: "2026-03-27T12:30:00Z", project: 3 },
+    { id: 14, title: "Integrate client progress charts", description: "Budget vs actual cost and timeline charts for client area.", assigned_to: 4, assigned_to_name: "Dev Employee", created_by: 2, created_by_name: "Raghav Manager", company: 1, status: "COMPLETED", priority: "HIGH", due_date: "2026-04-02", attachment: null, image: null, reference_link: "", progress: 100, created_at: "2026-03-22T12:30:00Z", project: 2 },
+    { id: 15, title: "Implement company settings editor", description: "Editable settings surface with profile banner.", assigned_to: 6, assigned_to_name: "Meera Engineer", created_by: 1, created_by_name: "Saanvi Owner", company: 1, status: "IN_PROGRESS", priority: "LOW", due_date: "2026-04-21", attachment: null, image: null, reference_link: "", progress: 38, created_at: "2026-03-30T12:30:00Z", project: 1 }
+  ],
+  attendance: [
+    { id: 1, company_user_id: 2, employee_name: "Raghav Manager", employee_role: "MANAGER", date: "2026-03-27", check_in: "09:11:00", check_out: "18:06:00", status: "PRESENT" },
+    { id: 2, company_user_id: 2, employee_name: "Raghav Manager", employee_role: "MANAGER", date: "2026-03-28", check_in: "09:03:00", check_out: "18:14:00", status: "PRESENT" },
+    { id: 3, company_user_id: 2, employee_name: "Raghav Manager", employee_role: "MANAGER", date: "2026-03-29", check_in: "09:35:00", check_out: "18:25:00", status: "PRESENT" },
+    { id: 4, company_user_id: 4, employee_name: "Dev Employee", employee_role: "EMPLOYEE", date: "2026-03-27", check_in: "09:16:00", check_out: "18:02:00", status: "PRESENT" },
+    { id: 5, company_user_id: 4, employee_name: "Dev Employee", employee_role: "EMPLOYEE", date: "2026-03-28", check_in: "09:20:00", check_out: "17:58:00", status: "PRESENT" },
+    { id: 6, company_user_id: 4, employee_name: "Dev Employee", employee_role: "EMPLOYEE", date: "2026-03-29", check_in: "09:44:00", check_out: "18:18:00", status: "PRESENT" },
+    { id: 7, company_user_id: 6, employee_name: "Meera Engineer", employee_role: "EMPLOYEE", date: "2026-03-29", check_in: "09:08:00", check_out: "18:02:00", status: "PRESENT" },
+    { id: 8, company_user_id: 7, employee_name: "Kabir Designer", employee_role: "EMPLOYEE", date: "2026-03-29", check_in: "10:05:00", check_out: "18:00:00", status: "HALF_DAY" },
+    { id: 9, company_user_id: 3, employee_name: "Ira HR", employee_role: "HR", date: "2026-03-29", check_in: "09:10:00", check_out: "18:08:00", status: "PRESENT" }
+  ],
+  leaves: [
+    { id: 201, company_user_id: 4, employee_name: "Dev Employee", employee_role: "EMPLOYEE", start_date: "2026-04-06", end_date: "2026-04-07", reason: "Family function", status: "PENDING", applied_on: "2026-03-30T09:00:00Z" },
+    { id: 202, company_user_id: 2, employee_name: "Raghav Manager", employee_role: "MANAGER", start_date: "2026-04-11", end_date: "2026-04-11", reason: "Medical appointment", status: "APPROVED", applied_on: "2026-03-29T09:00:00Z" },
+    { id: 203, company_user_id: 6, employee_name: "Meera Engineer", employee_role: "EMPLOYEE", start_date: "2026-04-09", end_date: "2026-04-10", reason: "Travel", status: "REJECTED", applied_on: "2026-03-28T09:00:00Z" }
+  ],
+  reviews: [
+    { id: 1, employeeId: 4, rating: 4, feedback: "Consistent delivery on dashboard tasks with strong ownership.", review_date: "2026-03-30" }
+  ]
+};
